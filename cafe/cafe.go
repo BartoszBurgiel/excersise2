@@ -29,25 +29,34 @@ func (c *Cafe) OccupyComputer(t *tourist.Tourist) {
 
 	for i := 0; i < 8; i++ {
 
-		// go to a free computer
+		// Go to a free computer
 		if c.Computers[i].Free {
 			fmt.Println("User", t.ID, "occupies the computer", i+1)
 
+			// Make computer occupied
 			c.Computers[i].Free = false
+
+			// Set user to t
 			c.Computers[i].User = t
 			break
 		}
 	}
 }
 
+// KickUser from the computer && make the computer free
 func (c *Cafe) KickUser(t *tourist.Tourist) {
+
 	for i := 0; i < 8; i++ {
 
 		// go to a free computer
 		if c.Computers[i].User == t {
+
 			fmt.Println("User", t.ID, "is kicked from computer:", i+1)
 
+			// Make computer free
 			c.Computers[i].Free = true
+
+			// Remove user
 			c.Computers[i].User = nil
 			break
 		}
