@@ -56,3 +56,8 @@ func (c *Cafe) KickUser(t *tourist.Tourist) {
 		}
 	}
 }
+
+// GetUser returns a pointer to the user using computer with the index n
+func (c *Cafe) GetUser(n int) *tourist.Tourist {
+	return c.Computers[n].User
+}
