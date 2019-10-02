@@ -60,7 +60,10 @@ func main() {
 						// Add one to 'users that were already online'
 						group.UserCount++
 
+						// Check if all users used the computer
 						if group.UserCount == 25 {
+
+							// Let the program continue
 							group.IsDone <- true
 						}
 
