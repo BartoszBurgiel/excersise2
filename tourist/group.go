@@ -10,7 +10,10 @@ type Group struct {
 	Tourists chan *Tourist
 
 	//Every tourist used a computer
-	IsDone bool
+	IsDone chan bool
+
+	// Count of the users that already were online
+	UserCount int
 }
 
 // NewGroup constructor
@@ -26,5 +29,5 @@ func NewGroup() *Group {
 		tourists <- &Tourist{i + 1, 0, rand.Intn(105) + 15}
 	}
 
-	return &Group{tourists, false}
+	return &Group{tourists, make(chan bool), 0}
 }

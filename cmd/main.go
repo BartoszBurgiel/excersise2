@@ -21,7 +21,7 @@ func main() {
 	go func() {
 
 		// Go as long as the group isn't done
-		for !group.IsDone {
+		for {
 
 			// Proceed if and only if there's a free computer
 			<-cafe.FreeComputer
@@ -37,7 +37,7 @@ func main() {
 
 	// Goroutine for tourist management
 	go func() {
-		for !group.IsDone {
+		for {
 
 			// Iterate over all computers
 			for i := 0; i < 8; i++ {
@@ -57,6 +57,13 @@ func main() {
 						// Remove user from computer
 						cafe.KickUser(tempUser)
 
+						// Add one to 'users that were already online'
+						group.UserCount++
+
+						if group.UserCount == 25 {
+							group.IsDone <- true
+						}
+
 						// Free the computer
 						cafe.FreeComputer <- true
 
@@ -70,5 +77,5 @@ func main() {
 
 	}()
 
-	time.Sleep(time.Second)
+	<-group.IsDone
 }
