@@ -31,7 +31,7 @@ func (c *Cafe) OccupyComputer(t *tourist.Tourist) {
 
 		// Go to a free computer
 		if c.Computers[i].IsFree() {
-			fmt.Println("User", t.ID, "occupies the computer", i+1)
+			fmt.Printf("User %d occupies the computer nr. %d now", t.ID, i+1)
 
 			// Set user to t
 			c.Computers[i].User = t
@@ -48,7 +48,7 @@ func (c *Cafe) KickUser(t *tourist.Tourist) {
 		// go to a free computer
 		if c.Computers[i].User == t {
 
-			fmt.Println("User", t.ID, "is kicked from computer:", i+1)
+			fmt.Printf("User %d is kicked from the computer nr. %d\n He spent %d minutes online\n\n", t.ID, i+1, t.TimeOnline)
 
 			// Remove user
 			c.Computers[i].User = nil
