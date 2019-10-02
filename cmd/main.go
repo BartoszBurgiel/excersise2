@@ -14,25 +14,16 @@ func main() {
 	group := tourist.NewGroup()
 	cafe := cafe.NewCafe()
 
-	// fmt.Println(group)
-	// fmt.Println(cafe)
-
 	// Goroutine for computer management
 	go func() {
 
-		// Go as long as the group isn't done
 		for {
-
 			// Proceed if and only if there's a free computer
 			<-cafe.FreeComputer
 
-			fmt.Println("Free computer aviable")
-
+			// Occupy the free computer
 			cafe.OccupyComputer(<-group.Tourists)
-
-			fmt.Print("The free computer is now occupied\n\n")
 		}
-
 	}()
 
 	// Goroutine for tourist management
@@ -69,7 +60,6 @@ func main() {
 
 						// Free the computer
 						cafe.FreeComputer <- true
-
 					}
 				}
 			}
