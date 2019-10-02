@@ -14,8 +14,8 @@ func main() {
 	fmt.Println("")
 
 	// Fetch args
-	nComputer, _ := strconv.ParseInt(os.Args[1], 10, 64)
-	nTourists, _ := strconv.ParseInt(os.Args[2], 10, 64)
+	nComputer, _ := strconv.Atoi(os.Args[1])
+	nTourists, _ := strconv.Atoi(os.Args[2])
 
 	// Define structs
 	group := tourist.NewGroup()
@@ -38,7 +38,7 @@ func main() {
 		for {
 
 			// Iterate over all computers
-			for i := 0; i < 8; i++ {
+			for i := 0; i < nComputer; i++ {
 
 				// If computer is occupied
 				if !cafe.Computers[i].IsFree() {
@@ -59,7 +59,7 @@ func main() {
 						group.UserCount++
 
 						// Check if all users used the computer
-						if group.UserCount == 25 {
+						if group.UserCount == nTourists {
 
 							// Let the program continue
 							group.IsDone <- true
