@@ -1,8 +1,13 @@
 package tourist
 
+import (
+	"math/rand"
+	"time"
+)
+
 // Group represents a group of tourists
 type Group struct {
-	Tourists [25]*Tourist
+	Tourists chan *Tourist
 
 	//Every tourist used a computer
 	IsDone bool
@@ -12,10 +17,12 @@ type Group struct {
 
 // NewGroup constructor
 func NewGroup() *Group {
-	tourists := [25]*Tourist{}
+	tourists := make(chan *Tourist, 25)
+
+	rand.Seed(time.Now().UnixNano())
 
 	for i := 0; i < 25; i++ {
-		tourists[i] = &Tourist{i + 1, 0, false, false, true}
+		tourists <- &Tourist{i + 1, 0, rand.Intn(105) + 15, make(chan bool), make(chan bool), make(chan bool)}
 	}
 
 	return &Group{tourists, false, 25, 0}
