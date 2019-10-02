@@ -24,18 +24,6 @@ func NewCafe() *Cafe {
 	return &Cafe{comps, ch}
 }
 
-// AnyFreeComputer returns an information
-// if any of the cafe's computers is free
-func (c *Cafe) AnyFreeComputer() (bool, int) {
-	for n, com := range c.Computers {
-		if com.Free {
-			return true, n
-		}
-	}
-
-	return false, -1
-}
-
 // OccupyComputer simulates a tourist using a computer
 func (c *Cafe) OccupyComputer(t *tourist.Tourist) {
 

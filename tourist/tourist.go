@@ -7,6 +7,4 @@ type Tourist struct {
 	// TimeOnline -> minutes already spent online
 	// LimitOnline -> max time spent online
 	TimeOnline, LimitOnline int
-
-	WasOnline, IsOnline, Waits chan bool
 }
