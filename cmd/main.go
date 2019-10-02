@@ -18,8 +18,8 @@ func main() {
 	nTourists, _ := strconv.Atoi(os.Args[2])
 
 	// Define structs
-	group := tourist.NewGroup(nComputer)
-	cafe := cafe.NewCafe(nTourists)
+	group := tourist.NewGroup(nTourists)
+	cafe := cafe.NewCafe(nComputer)
 
 	// Goroutine for computer management
 	go func() {
@@ -38,7 +38,7 @@ func main() {
 		for {
 
 			// Iterate over all computers
-			for i := 0; i < nComputer; i++ {
+			for i := 0; i < len(cafe.Computers); i++ {
 
 				// If computer is occupied
 				if !cafe.Computers[i].IsFree() {
