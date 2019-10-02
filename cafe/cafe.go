@@ -17,7 +17,7 @@ func NewCafe() *Cafe {
 	ch := make(chan bool, 8)
 
 	for i := 0; i < 8; i++ {
-		comps[i] = Computer{nil, true}
+		comps[i] = Computer{nil}
 		ch <- true
 	}
 
@@ -30,11 +30,8 @@ func (c *Cafe) OccupyComputer(t *tourist.Tourist) {
 	for i := 0; i < 8; i++ {
 
 		// Go to a free computer
-		if c.Computers[i].Free {
+		if c.Computers[i].IsFree() {
 			fmt.Println("User", t.ID, "occupies the computer", i+1)
-
-			// Make computer occupied
-			c.Computers[i].Free = false
 
 			// Set user to t
 			c.Computers[i].User = t
@@ -52,9 +49,6 @@ func (c *Cafe) KickUser(t *tourist.Tourist) {
 		if c.Computers[i].User == t {
 
 			fmt.Println("User", t.ID, "is kicked from computer:", i+1)
-
-			// Make computer free
-			c.Computers[i].Free = true
 
 			// Remove user
 			c.Computers[i].User = nil

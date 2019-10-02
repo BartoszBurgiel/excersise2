@@ -40,7 +40,8 @@ func main() {
 
 			// Increase users' time online
 			for i := 0; i < 8; i++ {
-				if cafe.Computers[i].User != nil {
+
+				if !cafe.Computers[i].IsFree() {
 
 					cafe.Computers[i].User.TimeOnline++
 
