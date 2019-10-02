@@ -40,7 +40,7 @@ func (c *Cafe) OccupyComputer(t *tourist.Tourist) {
 	}
 }
 
-// KickUser from the computer && make the computer free
+// KickUser from the computer and make the computer free
 func (c *Cafe) KickUser(t *tourist.Tourist) {
 
 	for i := 0; i < len(c.Computers); i++ {

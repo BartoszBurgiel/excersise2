@@ -17,13 +17,13 @@ type Group struct {
 }
 
 // NewGroup constructor
-func NewGroup() *Group {
-	tourists := make(chan *Tourist, 25)
+func NewGroup(nTourist int) *Group {
+	tourists := make(chan *Tourist, nTourist)
 
 	// New seed
 	rand.Seed(time.Now().UnixNano())
 
-	for i := 0; i < 25; i++ {
+	for i := 0; i < nTourist; i++ {
 
 		// Use random time as time user wants to spend online
 		tourists <- &Tourist{i + 1, 0, rand.Intn(105) + 15}
