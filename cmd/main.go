@@ -71,4 +71,6 @@ func main() {
 	}()
 
 	<-group.IsDone
+
+	fmt.Println("Everyone used the computer. Not it's time to party!")
 }
