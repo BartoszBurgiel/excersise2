@@ -4,11 +4,18 @@ import (
 	"fmt"
 	"internetCafe/cafe"
 	"internetCafe/tourist"
+	"os"
+	"strconv"
 	"time"
 )
 
 func main() {
 	fmt.Println("Excersise 3 - Internet cafe")
+	fmt.Println("")
+
+	// Fetch args
+	nComputer, _ := strconv.ParseInt(os.Args[1], 10, 64)
+	nTourists, _ := strconv.ParseInt(os.Args[2], 10, 64)
 
 	// Define structs
 	group := tourist.NewGroup()
