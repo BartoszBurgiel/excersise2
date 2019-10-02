@@ -18,8 +18,8 @@ func main() {
 	nTourists, _ := strconv.Atoi(os.Args[2])
 
 	// Define structs
-	group := tourist.NewGroup()
-	cafe := cafe.NewCafe()
+	group := tourist.NewGroup(nComputer)
+	cafe := cafe.NewCafe(nTourists)
 
 	// Goroutine for computer management
 	go func() {

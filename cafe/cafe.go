@@ -7,17 +7,17 @@ import (
 
 // Cafe represents an internetcafe with its computers
 type Cafe struct {
-	Computers    [8]Computer
+	Computers    []Computer
 	FreeComputer chan bool
 }
 
 // NewCafe is Cafe constructor
-func NewCafe() *Cafe {
-	comps := [8]Computer{}
-	ch := make(chan bool, 8)
+func NewCafe(nComp int) *Cafe {
+	comps := []Computer{}
+	ch := make(chan bool, nComp)
 
-	for i := 0; i < 8; i++ {
-		comps[i] = Computer{nil}
+	for i := 0; i < nComp; i++ {
+		comps = append(comps, Computer{nil})
 		ch <- true
 	}
 
@@ -27,7 +27,7 @@ func NewCafe() *Cafe {
 // OccupyComputer simulates a tourist using a computer
 func (c *Cafe) OccupyComputer(t *tourist.Tourist) {
 
-	for i := 0; i < 8; i++ {
+	for i := 0; i < len(c.Computers); i++ {
 
 		// Go to a free computer
 		if c.Computers[i].IsFree() {
@@ -43,7 +43,7 @@ func (c *Cafe) OccupyComputer(t *tourist.Tourist) {
 // KickUser from the computer && make the computer free
 func (c *Cafe) KickUser(t *tourist.Tourist) {
 
-	for i := 0; i < 8; i++ {
+	for i := 0; i < len(c.Computers); i++ {
 
 		// go to a free computer
 		if c.Computers[i].User == t {
