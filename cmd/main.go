@@ -23,6 +23,7 @@ func main() {
 		// Go as long as the group isn't done
 		for !group.IsDone {
 
+			// Proceed if and only if there's a free computer
 			<-cafe.FreeComputer
 
 			fmt.Println("Free computer aviable")
@@ -38,26 +39,32 @@ func main() {
 	go func() {
 		for !group.IsDone {
 
-			// Increase users' time online
+			// Iterate over all computers
 			for i := 0; i < 8; i++ {
 
+				// If computer is occupied
 				if !cafe.Computers[i].IsFree() {
 
-					cafe.Computers[i].User.TimeOnline++
+					// Temporary variable as shortcut for the user of the current computer
+					tempUser := cafe.GetUser(i)
 
-					// check if user is done
-					if cafe.Computers[i].User.TimeOnline > cafe.Computers[i].User.LimitOnline {
+					// Increase users' time online by one (minute)
+					tempUser.TimeOnline++
 
-						// remove user from computer
-						cafe.KickUser(cafe.Computers[i].User)
+					// Check if user is done
+					if tempUser.TimeOnline > tempUser.LimitOnline {
 
-						// free a computer
+						// Remove user from computer
+						cafe.KickUser(tempUser)
+
+						// Free the computer
 						cafe.FreeComputer <- true
 
 					}
 				}
 			}
 
+			// "Ticker"
 			time.Sleep(time.Millisecond)
 		}
 
